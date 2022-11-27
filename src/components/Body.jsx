@@ -3,8 +3,6 @@ import { nanoid } from "nanoid";
 import CardSet from "./CardSet";
 
 export default function Body() {
-  const [topic, setTopic] = useState("");
-  const [desc, setDesc] = useState("");
   const [cards, setCards] = useState([
     {
       topic: "리액트 공부하기",
@@ -22,23 +20,19 @@ export default function Body() {
 
   //todo 화살표 함수로변경
   // github에 코드 업로드하기(repo하나 만들어서)
-  const handleNameChange = (e) => {
-    setTopic(e.target.value);
-  };
 
-  const handleDescChange = (e) => {
-    setDesc(e.target.value);
-  };
+  const addCard = (e) => {
+    e.preventDefault();
+    const topic = e.target.topic.value;
+    const desc = e.target.desc.value;
 
-  const addCard = () => {
     setCards((prev) => [
       ...prev,
       { topic: topic, desc: desc, id: nanoid(), done: false },
     ]);
-    setTopic("");
-    setDesc("");
-    // document.getElementById("name").value = "";
-    // document.getElementById("desc").value = "";
+
+    e.target.topic.value = "";
+    e.target.desc.value = "";
   };
 
   const onClickToggleHandler = (id) => {
@@ -55,31 +49,23 @@ export default function Body() {
 
   return (
     <div className="container">
-      <div className="body-top-container">
-        <div className="flex">
-          <div className="flex flex-row-verticalCenter">
-            <p>제목</p>
-            <input
-              className="input-shape"
-              id="name"
-              onChange={handleNameChange}
-              value={topic}
-            />
+      <form onSubmit={addCard}>
+        <div className="body-top-container">
+          <div className="flex">
+            <div className="flex flex-row-verticalCenter">
+              <p>제목</p>
+              <input className="input-shape" name="topic" />
+            </div>
+            <div className="flex flex-row-verticalCenter">
+              <p>내용</p>
+              <input className="input-shape" name="desc" />
+            </div>
           </div>
-          <div className="flex flex-row-verticalCenter">
-            <p>내용</p>
-            <input
-              className="input-shape"
-              id="desc"
-              onChange={handleDescChange}
-              value={desc}
-            />
-          </div>
+          <button className="btn btn-teal" type="submit">
+            추가하기
+          </button>
         </div>
-        <button className="btn btn-teal" onClick={addCard}>
-          추가하기
-        </button>
-      </div>
+      </form>
       <div className="body-padding">
         <h1>working...🔥</h1>
         <div className="flex flex-wrap cards-flex cards-gap">
