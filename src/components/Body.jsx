@@ -22,6 +22,7 @@ export default function Body() {
 
   //todo 화살표 함수로변경
   // github에 코드 업로드하기(repo하나 만들어서)
+
   const handleNameChange = (e) => {
     setTopic(e.target.value);
   };
@@ -37,8 +38,6 @@ export default function Body() {
     ]);
     setTopic("");
     setDesc("");
-    // document.getElementById("name").value = "";
-    // document.getElementById("desc").value = "";
   };
 
   const onClickToggleHandler = (id) => {
