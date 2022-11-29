@@ -22,19 +22,22 @@ export default function Body() {
 
   //todo 화살표 함수로변경
   // github에 코드 업로드하기(repo하나 만들어서)
-
   const addCard = () => {
-    setCards([
-      ...cards,
+    const topic = topicRef.current.value;
+    const desc = descRef.current.value;
+
+    setCards((prev) => [
+      ...prev,
       {
-        topic: topicRef.current.value,
-        desc: descRef.current.value,
+        topic: topic,
+        desc: desc,
         id: nanoid(),
         done: false,
       },
     ]);
 
     topicRef.current.value = "";
+    topicRef.current.focus();
     descRef.current.value = "";
   };
 
@@ -56,7 +59,7 @@ export default function Body() {
         <div className="flex">
           <div className="flex flex-row-verticalCenter">
             <p>제목</p>
-            <input className="input-shape" ref={topicRef} />
+            <input autoFocus className="input-shape" ref={topicRef} />
           </div>
           <div className="flex flex-row-verticalCenter">
             <p>내용</p>
